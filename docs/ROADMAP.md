@@ -9,9 +9,9 @@
 - [x] Create virtual environment
 - [x] Configure `pyproject.toml`
 - [x] Install `httpx` and `pytest`
-- [ ] Create `src/orbit_ledger/` package
-- [ ] Create `tests/` and `docs/` directories
-- [ ] Create ignored `data/raw/` directory
+- [x] Create `src/orbit_ledger/` package
+- [x] Create `tests/` and `docs/` directories
+- [x] Create ignored `data/raw/` directory
 
 ### Understand the Data Source
 - [ ] Read JPL Close-Approach API documentation and usage policy
