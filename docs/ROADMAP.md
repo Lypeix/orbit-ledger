@@ -1,3 +1,5 @@
+I overcomplicated phase 1. Drop the separate source-contract document, checksums and mandatory devlog updates. Keep the working capture, basic error handling and a few useful tests.
+
 # ROADMAP
 
 ## Phase 1 — Project Setup and Source Capture
@@ -13,48 +15,26 @@
 - [x] Create `tests/` and `docs/` directories
 - [x] Create ignored `data/raw/` directory
 
-### Understand the Data Source
-- [ ] Read JPL Close-Approach API documentation and usage policy
-- [ ] Define January 2025 as the first ingestion window
-- [ ] Define explicit Earth, NEO and distance filters
-- [ ] Request optional diameter information
-- [ ] Identify what one source record represents
-- [ ] Document required fields, units and nullable values
-- [ ] Document the difference between source time in TDB and retrieval time in UTC
-- [ ] Record findings in `docs/source-contract.md`
+### Fetch Data
+- [ ] Create a function that requests JPL close-approach data
+- [ ] Set January 2025, Earth, NEO and distance filters; include diameters
+- [ ] Configure a timeout and the User-Agent required by JPL
+- [ ] Handle HTTP failures, invalid JSON and valid empty results
+- [ ] Run one request and inspect the returned fields and values
 
-### Source Client
-- [ ] Create an HTTP client for the JPL API
-- [ ] Configure an application-specific `User-Agent`
-- [ ] Add explicit request parameters and timeout
-- [ ] Handle unsuccessful HTTP responses
-- [ ] Handle invalid JSON responses
-- [ ] Check the response API version
-- [ ] Recognize valid empty results
-- [ ] Keep requests sequential
-
-### Raw Data Capture
-- [ ] Fetch January 2025 data
-- [ ] Preserve the original response without modifying it
-- [ ] Assign a unique capture identifier
-- [ ] Save request parameters and retrieval timestamp
-- [ ] Calculate and save the response SHA-256 checksum
-- [ ] Prevent existing captures from being overwritten
-- [ ] Verify the saved response can be opened offline
+### Save Data
+- [ ] Save the original response in `data/raw/`
+- [ ] Use a unique filename to avoid overwriting previous captures
+- [ ] Save request parameters and retrieval time alongside the response
+- [ ] Load the saved response without making another API request
 
 ### Testing
-- [ ] Create a small attributed response fixture
-- [ ] Test successful response capture using mocked HTTP
-- [ ] Test HTTP errors and timeouts
-- [ ] Test invalid JSON and unsupported API versions
-- [ ] Test valid empty responses
-- [ ] Verify saved metadata and checksum
-- [ ] Ensure tests make no live API requests
+- [ ] Test successful capture with mocked HTTP
+- [ ] Test HTTP failure, timeout and invalid JSON
+- [ ] Test an empty response
+- [ ] Verify saved data can be read back correctly
 
 ### Finish
-- [ ] Document setup and capture instructions in `README.md`
-- [ ] Complete `docs/source-contract.md`
-- [ ] Record decisions and findings in `DEVLOG.md`
-- [ ] Run the test suite
+- [ ] Add the command for running the capture to `README.md`
+- [ ] Run tests
 - [ ] Commit phase 1
-- [ ] Review the captured data before designing PostgreSQL tables
