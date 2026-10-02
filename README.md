@@ -1,6 +1,6 @@
 # OrbitLedger
 
-My first data engineering project.
+ETL pipeline for NASA/JPL close-approach data, focused on reliable ingestion, validation, and transformation. Currently crawling
 
 ## Documentation
 

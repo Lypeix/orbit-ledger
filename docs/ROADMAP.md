@@ -16,8 +16,8 @@ I overcomplicated phase 1. Drop the separate source-contract document, checksums
 - [x] Create ignored `data/raw/` directory
 
 ### Fetch Data
-- [ ] Create a function that requests JPL close-approach data
-- [ ] Set January 2025, Earth, NEO and distance filters; include diameters
+- [x] Create a function that requests JPL close-approach data
+- [x] Set January 2025, Earth, NEO and distance filters; include diameters
 - [ ] Configure a timeout and the User-Agent required by JPL
 - [ ] Handle HTTP failures, invalid JSON and valid empty results
 - [ ] Run one request and inspect the returned fields and values
