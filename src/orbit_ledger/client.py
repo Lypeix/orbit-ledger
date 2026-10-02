@@ -57,6 +57,7 @@ def main() -> int:
     print("Fields:", data["fields"])
     print("First row:", data["data"][0])
 
+    return 0
 
 if __name__ == "__main__":
     raise SystemExit(main())
