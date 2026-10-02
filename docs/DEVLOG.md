@@ -20,3 +20,5 @@
     - Added a 10-second request timeout
     - Added HTTP error handling with raise_for_status()
     - Return parsed JSON response data
+    - Added main() as the script entry
+    - Added handling for timeouts, HTTP errors, general request failures, and invalid JSON

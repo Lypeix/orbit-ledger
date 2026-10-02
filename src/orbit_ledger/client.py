@@ -1,4 +1,7 @@
+import sys
 import httpx
+
+from json import JSONDecodeError
 
 def fetch_close_approaches() -> dict:
     url = "https://ssd-api.jpl.nasa.gov/cad.api"
@@ -24,3 +27,36 @@ def fetch_close_approaches() -> dict:
     response.raise_for_status()
     return response.json()
 
+def main() -> int:
+    try: 
+        data = fetch_close_approaches()
+
+    except httpx.TimeoutException:
+        print("Request timed out", file=sys.stderr)
+        return 1 
+
+    except httpx.HTTPStatusError as error:
+        status = error.response.status_code
+        print(f"JPL returned HTTP {status}", file=sys.stderr)
+        return 1 
+
+    except httpx.RequestError as error:
+        print(f"Request failed: {error}", file=sys.stderr)
+        return 1
+
+    except JSONDecodeError:
+        print("JPL returned invalid JSON", file=sys.stderr)
+        return 1
+
+    print("Count:", data["count"])
+
+    if data["count"] == 0:
+        print("No close approaches fitted the filter")
+        return 0
+
+    print("Fields:", data["fields"])
+    print("First row:", data["data"][0])
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
