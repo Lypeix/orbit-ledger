@@ -1,5 +1,3 @@
-I overcomplicated phase 1. Drop the separate source-contract document, checksums and mandatory devlog updates. Keep the working capture, basic error handling and a few useful tests.
-
 # ROADMAP
 
 ## Phase 1 — Project Setup and Source Capture
