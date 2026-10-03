@@ -26,3 +26,4 @@
 # Day 3 - 3.10.2026
 - Inside `src/orbit_ledger/client.py`:
     - Implemented `save_capture()` for capturing raw JPL responses and assigning them unique `filename` + `metadata`
+    - Added `load_capture()` for loading the saved JPL responses

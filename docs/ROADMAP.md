@@ -24,7 +24,7 @@
 - [x] Save the original response in `data/raw/`
 - [x] Use a unique filename to avoid overwriting previous captures
 - [x] Save request parameters and retrieval time alongside the response
-- [ ] Load the saved response without making another API request
+- [x] Load the saved response without making another API request
 
 ### Testing
 - [ ] Test successful capture with mocked HTTP
@@ -35,4 +35,3 @@
 ### Finish
 - [ ] Add the command for running the capture to `README.md`
 - [ ] Run tests
-- [ ] Commit phase 1

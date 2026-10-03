@@ -65,6 +65,11 @@ def save_capture(
     return response_path
 
 
+def load_capture(path: Path) -> dict:
+    with path.open("rb") as file:
+        return json.load(file)
+
+
 def main() -> int:
     try: 
         data = fetch_close_approaches()
