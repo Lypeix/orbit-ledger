@@ -70,6 +70,18 @@ def load_capture(path: Path) -> dict:
         return json.load(file)
 
 
+def print_summary(data: dict) -> None:
+    print("Count:", data["count"])
+
+    if data["count"] == 0:
+        print("No close approaches fitted the filter")
+        return 0
+
+    print("Fields:", data["fields"])
+    print("First row:", data["data"][0])
+
+    return 0
+
 def main() -> int:
     try: 
         data = fetch_close_approaches()
@@ -87,16 +99,6 @@ def main() -> int:
         print(f"Request failed: {error}", file=sys.stderr)
         return 1
 
-    print("Count:", data["count"])
-
-    if data["count"] == 0:
-        print("No close approaches fitted the filter")
-        return 0
-
-    print("Fields:", data["fields"])
-    print("First row:", data["data"][0])
-
-    return 0
 
 if __name__ == "__main__":
     raise SystemExit(main())

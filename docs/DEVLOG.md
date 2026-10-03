@@ -27,3 +27,4 @@
 - Inside `src/orbit_ledger/client.py`:
     - Implemented `save_capture()` for capturing raw JPL responses and assigning them unique `filename` + `metadata`
     - Added `load_capture()` for loading the saved JPL responses
+    - Moved data inspection from `main()` to its own dedicated `print_summary()`
