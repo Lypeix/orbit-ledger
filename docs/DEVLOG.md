@@ -22,3 +22,7 @@
     - Return parsed JSON response data
     - Added main() as the script entry
     - Added handling for timeouts, HTTP errors, general request failures, and invalid JSON
+
+# Day 3 - 3.10.2026
+- Inside `src/orbit_ledger/client.py`:
+    - Implemented `save_capture()` for capturing raw JPL responses and assigning them unique `filename` + `metadata`

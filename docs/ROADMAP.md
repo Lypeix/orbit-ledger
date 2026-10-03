@@ -21,9 +21,9 @@
 - [x] Run one request and inspect the returned fields and values
 
 ### Save Data
-- [ ] Save the original response in `data/raw/`
-- [ ] Use a unique filename to avoid overwriting previous captures
-- [ ] Save request parameters and retrieval time alongside the response
+- [x] Save the original response in `data/raw/`
+- [x] Use a unique filename to avoid overwriting previous captures
+- [x] Save request parameters and retrieval time alongside the response
 - [ ] Load the saved response without making another API request
 
 ### Testing
