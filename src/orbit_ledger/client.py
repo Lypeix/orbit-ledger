@@ -34,7 +34,7 @@ def fetch_close_approaches() -> httpx.Response:
         )
 
     response.raise_for_status()
-    return response.json()
+    return response
 
 
 def save_capture(
@@ -75,7 +75,7 @@ def print_summary(data: dict) -> None:
 
     if data["count"] == 0:
         print("No close approaches fitted the filter")
-        return 0
+        return
 
     print("Fields:", data["fields"])
     print("First row:", data["data"][0])
