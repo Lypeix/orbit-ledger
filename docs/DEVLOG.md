@@ -28,3 +28,11 @@
     - Implemented `save_capture()` for capturing raw JPL responses and assigning them unique `filename` + `metadata`
     - Added `load_capture()` for loading the saved JPL responses
     - Moved data inspection from `main()` to its own dedicated `print_summary()`
+
+# Day 4 - 4.10.2026
+- Inside `src/orbit_ledger/client.py`:
+    - Added `--replay` argument parsing to `main()`
+    - Added OSError exception
+    - Changed `fetch_close_approaches()` expected return type from `dict` to `httpx.Response`
+    - Changed `request_params` return type inside `metadata` from `str` to `dict`
+    - Removed `return 0` from `print_summary()` because it expects None
