@@ -1,6 +1,6 @@
 # DEVLOG
 
-# Day 1 - 1.10.2026
+# Dev Day 1 - 1.10.2026
 - Planned Out the Project Scope
 - Set Up Documentation
 - Configured `.gitignore`
@@ -10,7 +10,7 @@
 - Updated pip
 - Installed `httpx` and `pytest` dependencies
 
-# Day 2 - 2.10.2026
+# Dev Day 2 - 2.10.2026
 - Created `src/orbit_ledger/client.py`
     - Added fetch_close_approaches() for requesting JPL close-approach data
     - Added January 2025 Earth/NEO query parameters
@@ -23,16 +23,20 @@
     - Added main() as the script entry
     - Added handling for timeouts, HTTP errors, general request failures, and invalid JSON
 
-# Day 3 - 3.10.2026
+# Dev Day 3 - 3.10.2026
 - Inside `src/orbit_ledger/client.py`:
     - Implemented `save_capture()` for capturing raw JPL responses and assigning them unique `filename` + `metadata`
     - Added `load_capture()` for loading the saved JPL responses
     - Moved data inspection from `main()` to its own dedicated `print_summary()`
 
-# Day 4 - 4.10.2026
+# Dev Day 4 - 4.10.2026
 - Inside `src/orbit_ledger/client.py`:
     - Added `--replay` argument parsing to `main()`
     - Added OSError exception
     - Changed `fetch_close_approaches()` expected return type from `dict` to `httpx.Response`
     - Changed `request_params` return type inside `metadata` from `str` to `dict`
     - Removed `return 0` from `print_summary()` because it expects None
+
+# Dev Day 5 - 7.10.2026
+- Inside `tests/client.py`:
+    - Set up fake JPL API response
