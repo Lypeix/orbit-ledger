@@ -40,3 +40,5 @@
 # Dev Day 5 - 7.10.2026
 - Inside `tests/client.py`:
     - Set up fake JPL API response
+    - Added pytest fixture for: creating temporary test paths and preventing tests from creating real API requests
+    - Added helper that replaces future HTTP GET with a fake one
