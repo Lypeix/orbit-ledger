@@ -78,3 +78,40 @@ def test_successful_capture(isolated_client, monkeypatch, capsys):
 
     retrieved_at = datetime.fromisoformat(metadata["retrieved_at_utc"]) # converts the timestamp inside metadata file from str into a Python datetime object
     assert before <= retrieved_at <= datetime.now(timezone.utc) # ensures the converted timestamp falls between the start of main() and current time
+
+
+@pytest.mark.parametrize(
+    ("failure", "expected_message"),
+    [
+        ("http", "HTTP 503"),
+        ("timeout", "Request timed out"),
+        ("json", "invalid JSON")
+    ],
+)
+def test_failed_fetch(
+    isolated_client,
+    monkeypatch,
+    capsys,
+    failure,
+    expected_message
+):
+    raw_dir = isolated_client
+
+    if failure == "timeout":
+        def fake_get(*args, **kwargs):
+            raise httpx.ReadTimeout("Simulated timeout")
+
+        monkeypatch.setattr(client.httpx, "get", fake_get)
+
+    elif failure == "http":
+        mock_http_response(monkeypatch, b"Unavailable", status_code=503)
+
+    elif failure == "json":
+        mock_http_response(monkeypatch, b"This isnt JSON")
+
+    exit_code = client.main()
+
+    assert exit_code == 1
+    assert expected_message in capsys.readouterr().err
+
+    assert not list(raw_dir.glob("*.json"))

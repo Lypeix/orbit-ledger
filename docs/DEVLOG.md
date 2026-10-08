@@ -46,3 +46,4 @@
 # Dev Day 6 - 8.10.2026
 - Inside `tests/client.py`:
     - Added `test_successful_capture()` mocking and verifying a successful API response workflow
+    - Added `test_failed_fetch()` mocking a failed API response and verifying error handling
