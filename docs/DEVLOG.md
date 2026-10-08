@@ -42,3 +42,7 @@
     - Set up fake JPL API response
     - Added pytest fixture for: creating temporary test paths and preventing tests from creating real API requests
     - Added helper that replaces future HTTP GET with a fake one
+
+# Dev Day 6 - 8.10.2026
+- Inside `tests/client.py`:
+    - Added `test_successful_capture()` mocking and verifying a successful API response workflow

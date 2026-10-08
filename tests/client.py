@@ -49,3 +49,32 @@ def mock_http_response(monkeypatch, body, status_code=200):
         )
 
     monkeypatch.setattr(client.httpx, "get", fake_get)
+
+
+def test_successful_capture(isolated_client, monkeypatch, capsys):
+    raw_dir = isolated_client
+    mock_http_response(monkeypatch, SAMPLE_RESPONSE)
+    before = datetime.now(timezone.utc)
+
+    exit_code = client.main()
+
+    assert exit_code == 0
+    assert "Count: 1" in capsys.readouterr().out # 'in' to check Count value inside another string
+
+    metadata_files = list(raw_dir.glob("*.metadata.json"))
+    assert len(metadata_files) == 1
+
+    metadata = json.loads(metadata_files[0].read_text(encoding="utf-8"))
+    response_path = raw_dir / metadata["response_file"]
+
+    assert response_path.read_bytes() == SAMPLE_RESPONSE
+    assert len(list(raw_dir.iterdir())) == 2
+
+    assert metadata["status_code"] == 200
+    assert metadata["request_params"]["date-min"] == "2025-01-01"
+    assert metadata["request_params"]["date-max"] == "2025-02-01"
+    assert metadata["request_params"]["body"] == "Earth"
+    assert metadata["request_params"]["dist-max"] == "0.05"
+
+    retrieved_at = datetime.fromisoformat(metadata["retrieved_at_utc"]) # converts the timestamp inside metadata file from str into a Python datetime object
+    assert before <= retrieved_at <= datetime.now(timezone.utc) # ensures the converted timestamp falls between the start of main() and current time
