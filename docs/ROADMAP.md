@@ -27,11 +27,11 @@
 - [x] Load the saved response without making another API request
 
 ### Testing
-- [ ] Test successful capture with mocked HTTP
-- [ ] Test HTTP failure, timeout and invalid JSON
-- [ ] Test an empty response
-- [ ] Verify saved data can be read back correctly
+- [x] Test successful capture with mocked HTTP
+- [x] Test HTTP failure, timeout and invalid JSON
+- [x] Test an empty response
+- [x] Verify saved data can be read back correctly
 
 ### Finish
-- [ ] Add the command for running the capture to `README.md`
-- [ ] Run tests
+- [x] Add the command for running the capture to `README.md`
+- [x] Run tests

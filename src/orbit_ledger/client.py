@@ -127,7 +127,7 @@ def main() -> int:
 
     except json.JSONDecodeError:
         print(
-            f"The API response or saved file contains invalid JSON"
+            f"The API response or saved file contains invalid JSON", file=sys.stderr
         )
         return 1
 

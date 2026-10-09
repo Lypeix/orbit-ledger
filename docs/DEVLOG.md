@@ -47,3 +47,9 @@
 - Inside `tests/client.py`:
     - Added `test_successful_capture()` mocking and verifying a successful API response workflow
     - Added `test_failed_fetch()` mocking a failed API response and verifying error handling
+
+# Dev Day 7 - 9.10.2026
+- Inside `tests/client.py`:
+    - Added `test_empty_response()` for handling empty responses
+    - Added `test_replay_without_http()` for verifying that application can replay already saved API responses without making another HTTP request
+    - Added missing file=sys.stderr to json.JSONDecodeError inside `client.py`

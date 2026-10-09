@@ -88,6 +88,7 @@ def test_successful_capture(isolated_client, monkeypatch, capsys):
         ("json", "invalid JSON")
     ],
 )
+
 def test_failed_fetch(
     isolated_client,
     monkeypatch,
@@ -115,3 +116,42 @@ def test_failed_fetch(
     assert expected_message in capsys.readouterr().err
 
     assert not list(raw_dir.glob("*.json"))
+
+
+def test_empty_response(isolated_client, monkeypatch, capsys):
+    raw_dir = isolated_client
+    mock_http_response(monkeypatch, b'{"count": 0}')
+
+    exit_code = client.main()
+
+    output = capsys.readouterr()
+    assert "No close approaches" in output.out
+
+    metadata_path = next(raw_dir.glob("*.metadata.json"))
+    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    response_path = raw_dir / metadata["response_file"]
+
+    assert client.load_capture(response_path) == {"count": 0}
+
+
+def test_replay_without_http(isolated_client, monkeypatch, capsys):
+    raw_dir = isolated_client
+    raw_dir.mkdir()
+
+    response_path = raw_dir / "saved.json"
+    response_path.write_bytes(SAMPLE_RESPONSE)
+
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        ["orbit-ledger", "--replay", str(response_path)],
+    )
+
+    exit_code = client.main()
+
+    assert exit_code == 0
+    assert "Count: 1" in capsys.readouterr().out
+    assert client.load_capture(response_path) == json.loads(SAMPLE_RESPONSE)
+
+    assert list(raw_dir.iterdir()) == [response_path]
+    assert response_path.read_bytes() == SAMPLE_RESPONSE
